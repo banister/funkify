@@ -11,12 +11,6 @@ module Funkify
     end
   end
 
-  class ::Symbol
-    def +(other)
-      Funkify.compose(self, other)
-    end
-  end
-
   module_function
 
   def curry(obj, *args)
