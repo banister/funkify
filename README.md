@@ -1,7 +1,5 @@
 # Funkify
 
-**(c) Copyright 2013, Epitron**
-
 _Haskell-style partial application and composition for Ruby methods_
 
 ## Usage
@@ -58,7 +56,7 @@ Other examples:
 Add 10 to every item in an Enumerable:
 
 ```ruby
-(1..5).map(&funky.add(10)) #=> [11, 12, 13, 14, 15]
+(1..5).map &funky.add(10) #=> [11, 12, 13, 14, 15]
 ```
 
 Multiply by 10 and negate every item in an Enumerable:
