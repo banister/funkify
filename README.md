@@ -58,7 +58,7 @@ Other examples:
 Add 10 to every item in an Enumerable:
 
 ```ruby
-(1..5).map(&funky.add(10)) #=> [10, 12, 13, 14, 15]
+(1..5).map(&funky.add(10)) #=> [11, 12, 13, 14, 15]
 ```
 
 Multiply by 10 and negate every item in an Enumerable:
