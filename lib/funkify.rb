@@ -41,7 +41,7 @@ module Funkify
   def _procify(obj)
     case obj
     when Symbol
-      method(:obj).to_proc
+      method(obj).to_proc
     else
       obj.to_proc
     end
