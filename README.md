@@ -3,7 +3,7 @@
 _Haskell-style partial application and composition for Ruby methods_
 
 
-"In computer science, partial application refers to the process of 
+"In computer science, partial application refers to the process of
 fixing a number of arguments to a function, producing another function of smaller arity."
 --[Wikipedia](http://en.wikipedia.org/wiki/Partial_application)
 
@@ -49,15 +49,15 @@ add_1 = funky.add(1) #=> The `1` is partially applied and a `Proc` is returned
 add_1.(2) #=> We invoke that `Proc` with the remaining argument and the final result (`3`) is returned.
 ```
 
-We can also compose methods using `+`:
+We can also compose methods using `*`:
 
 ```ruby
-add_1_and_multiply_by_5 = funky.mult(5) + funky.add(1)
+add_1_and_multiply_by_5 = funky.mult(5) * funky.add(1)
 add_1_and_multiply_by_5.(10) #=> 55
 
 # We can even further compose the above with another method:
 
-(funky.negate + add_1_and_multiply_by_5).(10) #=> -55
+(funky.negate * add_1_and_multiply_by_5).(10) #=> -55
 ```
 
 Other examples:
@@ -71,7 +71,7 @@ Add 10 to every item in an Enumerable:
 Multiply by 10 and negate every item in an Enumerable:
 
 ```ruby
-(1..5).map &(funky.negate + funky.mult(10)) => [-10, -20, -30, -40, -50]
+(1..5).map &(funky.negate * funky.mult(10)) => [-10, -20, -30, -40, -50]
 ```
 
 ## Installation
