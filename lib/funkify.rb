@@ -12,7 +12,7 @@ module Funkify
 
     def |(other)
       if arity.zero?
-        other.(self.())
+        other.(*self.())
       else
         Funkify.compose(other, self)
       end
@@ -30,8 +30,8 @@ module Funkify
     end
   end
 
-  def pass(x)
-    -> { x }
+  def pass(*xs)
+    -> { xs }
   end
   public :pass
 
