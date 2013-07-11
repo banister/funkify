@@ -106,19 +106,19 @@ describe Funkify do
     end
 
     it 'returns a new Proc when composing methods' do
-      (@c.negate + @c.plus_1).is_a?(Proc).should == true
+      (@c.negate * @c.plus_1).is_a?(Proc).should == true
     end
 
     it 'invokes composed methods in the correct order (right-to-left)' do
-      (@c.negate + @c.plus_1).(5).should == -6
+      (@c.negate * @c.plus_1).(5).should == -6
     end
 
     it 'can compose partially applied methods' do
-      (@c.add(5) + @c.mult(2)).(5).should == 15
+      (@c.add(5) * @c.mult(2)).(5).should == 15
     end
 
     it 'can compose multiple methods' do
-      (@c.negate + @c.add(5) + @c.mult(5)).(5).should == -30
+      (@c.negate * @c.add(5) * @c.mult(5)).(5).should == -30
     end
   end
 end

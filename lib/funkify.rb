@@ -6,7 +6,7 @@ module Funkify
   end
 
   class ::Proc
-    def +(other)
+    def *(other)
       Funkify.compose(self, other)
     end
   end
