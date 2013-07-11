@@ -2,6 +2,15 @@
 
 _Haskell-style partial application and composition for Ruby methods_
 
+
+"In computer science, partial application refers to the process of 
+fixing a number of arguments to a function, producing another function of smaller arity."
+--[Wikipedia](http://en.wikipedia.org/wiki/Partial_application)
+
+[Partial application in haskell](http://www.haskell.org/haskellwiki/Partial_application)<br>
+[Function composition in haskell](http://www.haskell.org/haskellwiki/Function_composition)
+
+
 ## Usage
 
 ```ruby
