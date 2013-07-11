@@ -9,6 +9,14 @@ module Funkify
     def *(other)
       Funkify.compose(self, other)
     end
+
+    def |(other)
+      if arity.zero?
+        other.(self.())
+      else
+        Funkify.compose(other, self)
+      end
+    end
   end
 
   module_function
@@ -21,6 +29,11 @@ module Funkify
       obj.curry(*args)
     end
   end
+
+  def pass(x)
+    -> { x }
+  end
+  public :pass
 
   def compose(*args)
     head, *tail = args
@@ -41,26 +54,43 @@ module Funkify
     end
   end
 
-  module ClassMethods
-    def auto_curry(*names)
-      if names.empty?
-        in_use = nil
-        define_singleton_method(:method_added) do |name|
-          return if in_use
-          in_use = true
-          auto_curry name
-          in_use = false
-        end
-        return
-      end
+  def self.auto_curry_all_methods(receiver)
+    in_use = nil
+    receiver.define_singleton_method(:method_added) do |name|
+      return if in_use
+      in_use = true
+      receiver.auto_curry name
+      in_use = false
+    end
+  end
 
-      names.each do |name|
-        m = instance_method(name)
-        curried_method = nil
+  def self.auto_curry_some_methods(names, receiver)
+    names.each do |name|
+      m = receiver.instance_method(name)
+      curried_method = nil
+
+      receiver.class_eval do
         define_method(name) do |*args|
           curried_method ||= m.bind(self).to_proc.curry
           curried_method[*args]
         end
+      end
+    end
+  end
+
+  module ClassMethods
+    def auto_curry(*names)
+      if names.empty?
+        Funkify.auto_curry_all_methods(self)
+      else
+        Funkify.auto_curry_some_methods(names, self)
+      end
+    end
+
+    def point_free(&block)
+      -> (*args) do
+        b = instance_exec(&block).curry
+        args.empty? ? b : b[*args]
       end
     end
   end
