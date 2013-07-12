@@ -105,20 +105,50 @@ describe Funkify do
       end.new
     end
 
-    it 'returns a new Proc when composing methods' do
-      (@c.negate * @c.plus_1).is_a?(Proc).should == true
+    describe "normal composition" do
+      it 'returns a new Proc when composing methods' do
+        (@c.negate * @c.plus_1).is_a?(Proc).should == true
+      end
+
+      it 'invokes composed methods in the correct order (right-to-left)' do
+        (@c.negate * @c.plus_1).(5).should == -6
+      end
+
+      it 'can compose partially applied methods' do
+        (@c.add(5) * @c.mult(2)).(5).should == 15
+      end
+
+      it 'can compose multiple methods' do
+        (@c.negate * @c.add(5) * @c.mult(5)).(5).should == -30
+      end
     end
 
-    it 'invokes composed methods in the correct order (right-to-left)' do
-      (@c.negate * @c.plus_1).(5).should == -6
+    describe "reverse composition" do
+      it 'returns a new Proc when composing methods' do
+        (@c.negate | @c.plus_1).is_a?(Proc).should == true
+      end
+
+      it 'invokes reverse-composed methods in the correct order (left-to-right)' do
+        (@c.negate | @c.plus_1).(5).should == -4
+      end
+
+      it 'can reverse-compose partially applied methods' do
+        (@c.add(5) | @c.mult(2)).(5).should == 20
+      end
+
+      it 'can reverse-compose multiple methods' do
+        (@c.negate | @c.add(5) | @c.mult(5)).(5).should == 0
+      end
     end
 
-    it 'can compose partially applied methods' do
-      (@c.add(5) * @c.mult(2)).(5).should == 15
-    end
+    describe "pass method" do
+      it 'passes values into a reverse-composition stream' do
+        (@c.pass(5) | ( @c.add(5) | @c.mult(5))).should == 50
+      end
 
-    it 'can compose multiple methods' do
-      (@c.negate * @c.add(5) * @c.mult(5)).(5).should == -30
+      it 'passes values into a normal-composition stream' do
+        (@c.pass(5) | ( @c.add(5) * @c.mult(5))).should == 30
+      end
     end
   end
 end
