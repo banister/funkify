@@ -2,7 +2,6 @@
 
 _Haskell-style partial application and composition for Ruby methods_
 
-
 "In computer science, partial application refers to the process of
 fixing a number of arguments to a function, producing another function of smaller arity."
 --[Wikipedia](http://en.wikipedia.org/wiki/Partial_application)
@@ -39,6 +38,8 @@ class MyFunkyClass
 end
 ```
 
+### Partial application and currying
+
 When a method supports autocurrying it can still be invoked normally (if all parameters are provided) however if less than the required number are given a `Proc` is returned
 with the given parameters partially applied:
 
@@ -50,18 +51,29 @@ add_1 = funky.add(1) #=> The `1` is partially applied and a `Proc` is returned
 add_1.(2) #=> We invoke that `Proc` with the remaining argument and the final result (`3`) is returned.
 ```
 
-We can also compose methods using `*`:
+### Function composition
 
+We compose methods using the `*` and `|` operators. 
+
+`*` composes right to left, this is the standard way to compose functions found in languages like Haskell:
 ```ruby
-add_1_and_multiply_by_5 = funky.mult(5) * funky.add(1)
-add_1_and_multiply_by_5.(10) #=> 55
+(mult(5) * add(1)).(10) #=> 55
 
-# We can even further compose the above with another method:
-
-(funky.negate * add_1_and_multiply_by_5).(10) #=> -55
+# We can further compose the above with another method:
+(negate * mult(5) * add(1)).(10) #=> -55
 ```
 
-Other examples:
+`|` composes left to right, like a shell pipeline:
+```ruby
+(mult(5) | add(1) | negate).(3) #=> -16
+```
+
+As a cute bonus, we can inject values from the left into a pipeline with the `pass` method ([see more](http://showterm.io/47f46234281cf2c25f44a#fast)):
+```ruby
+pass(3) | (mult(5) | add(1) | negate) #=> -16
+```
+
+#### Other examples:
 
 Add 10 to every item in an Enumerable:
 
@@ -88,6 +100,10 @@ And then execute:
 Or install it yourself as:
 
     $ gem install funkify
+    
+## Dedication
+
+This library was inspired in part by stimulating conversations with [epitron](https://github.com/epitron) on Freenode.
 
 ## Contributing
 
