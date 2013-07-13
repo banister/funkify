@@ -17,3 +17,25 @@ desc "run pry with the development version of funkify loaded"
 task :pry do
   sh "pry -I./lib -r funkify"
 end
+
+desc "remove all gems"
+task :rm_gems do
+  sh "rm *.gem" rescue nil
+end
+
+desc "build the gem"
+task :gem => :rm_gems do
+  sh "gem build funkify.gemspec"
+end
+
+desc "display the current version"
+task :version do
+  puts Funkify::VERSION
+end
+
+desc "build and push latest gems"
+task :pushgem => :gem do
+  Dir["*.gem"].each do |gemfile|
+    sh "gem push funkify-#{Funkify::VERSION}.gem"
+  end
+end
