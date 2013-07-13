@@ -54,7 +54,7 @@ funky = MyFunkyClass.new
 
 funky.add(1, 2) #=> This works normally and returns 3
 add_1 = funky.add(1) #=> The `1` is partially applied and a `Proc` is returned
-add_1.(2) #=> We invoke that `Proc` with the remaining argument and the final result (`3`) is returned.
+add_1.(2) #=> 3 (We invoke that `Proc` with the remaining argument)
 ```
 
 ### Function composition
