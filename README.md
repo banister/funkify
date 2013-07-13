@@ -90,7 +90,7 @@ Add 10 to every item in an Enumerable:
 Multiply by 10 and negate every item in an Enumerable:
 
 ```ruby
-(1..5).map &(funky.negate * funky.mult(10)) => [-10, -20, -30, -40, -50]
+(1..5).map &(funky.negate * funky.mult(10)) #=> [-10, -20, -30, -40, -50]
 ```
 
 ## Installation
