@@ -73,7 +73,7 @@ We compose methods using the `*` and `|` operators.
 (mult(5) | add(1) | negate).(3) #=> -16
 ```
 
-As a cute bonus, we can inject values from the left into a pipeline with the `pass` method together with the `>=` (pipeline operator) (([see more](http://showterm.io/47f46234281cf2c25f44a#fast)):
+As a cute bonus, we can inject values from the left into a pipeline with the `pass` method together with the `>=` (pipeline operator) ([see more](http://showterm.io/47f46234281cf2c25f44a#fast)):
 ```ruby
 pass(3) >= mult(5) | add(1) | negate #=> -16
 ```
