@@ -2,8 +2,7 @@
 
 _Haskell-style partial application and composition for Ruby methods_
 
-This library attempts to bring a couple of basic (but powerful) features of functional programming to the Ruby ecosystem.
-Function composition when used in conjunction with partial application can yield exceptionally concise code, often more concise than the idiomatic Ruby equivalent. Check out the links
+Function composition when used in conjunction with partial application can yield exceptionally concise code, often more concise than the idiomatic Ruby counterpart. Check out the links
 below for further explanations of these features and examples of their use in Haskell:
 
 [Partial application in Haskell](http://www.haskell.org/haskellwiki/Partial_application)<br>
