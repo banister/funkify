@@ -143,11 +143,11 @@ describe Funkify do
 
     describe "pass method" do
       it 'passes values into a reverse-composition stream' do
-        (@c.pass(5) | ( @c.add(5) | @c.mult(5))).should == 50
+        (@c.pass(5) >= @c.add(5) | @c.mult(5)).should == 50
       end
 
       it 'passes values into a normal-composition stream' do
-        (@c.pass(5) | ( @c.add(5) * @c.mult(5))).should == 30
+        (@c.pass(5) >= @c.add(5) * @c.mult(5)).should == 30
       end
     end
   end

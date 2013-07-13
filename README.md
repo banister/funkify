@@ -9,7 +9,7 @@ below for further explanations of these features and examples of their use in Ha
 [Function composition in Haskell](http://www.haskell.org/haskellwiki/Function_composition)<br>
 [Curring in Haskell](http://www.haskell.org/haskellwiki/Currying)
 
-Also, watch [this video](http://www.youtube.com/watch?v=m3svKOdZijA) to learn about some of the cool things you can do with 
+Also, watch [this video](http://www.youtube.com/watch?v=m3svKOdZijA) to learn about some of the cool things you can do with
 function composition and partial application (the video is in Javascript but the ideas still apply to Ruby with Funkify)
 
 ## Usage
@@ -58,7 +58,7 @@ add_1.(2) #=> 3 (We invoke that `Proc` with the remaining argument)
 
 ### Function composition
 
-We compose methods using the `*` and `|` operators. 
+We compose methods using the `*` and `|` operators.
 
 `*` composes right to left, this is the standard way to compose functions found in languages like Haskell:
 ```ruby
@@ -73,9 +73,9 @@ We compose methods using the `*` and `|` operators.
 (mult(5) | add(1) | negate).(3) #=> -16
 ```
 
-As a cute bonus, we can inject values from the left into a pipeline with the `pass` method ([see more](http://showterm.io/47f46234281cf2c25f44a#fast)):
+As a cute bonus, we can inject values from the left into a pipeline with the `pass` method together with the `>=` (pipeline operator) (([see more](http://showterm.io/47f46234281cf2c25f44a#fast)):
 ```ruby
-pass(3) | (mult(5) | add(1) | negate) #=> -16
+pass(3) >= mult(5) | add(1) | negate #=> -16
 ```
 
 #### Other examples:
@@ -105,7 +105,7 @@ And then execute:
 Or install it yourself as:
 
     $ gem install funkify
-    
+
 ## Dedication
 
 This library was inspired in part by stimulating conversations with [epitron](https://github.com/epitron) on Freenode.

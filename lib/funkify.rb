@@ -11,11 +11,11 @@ module Funkify
     end
 
     def |(other)
-      if arity.zero?
-        other.(*self.())
-      else
-        Funkify.compose(other, self)
-      end
+      Funkify.compose(other, self)
+    end
+
+    def >=(other)
+      other.(*self.())
     end
   end
 
