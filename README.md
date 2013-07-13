@@ -2,10 +2,6 @@
 
 _Haskell-style partial application and composition for Ruby methods_
 
-"In computer science, partial application refers to the process of
-fixing a number of arguments to a function, producing another function of smaller arity."
---[Wikipedia](http://en.wikipedia.org/wiki/Partial_application)
-
 This library attempts to bring a couple of basic (but powerful) features of functional programming to the Ruby ecosystem.
 Function composition when used in conjunction with partial application can yield exceptionally concise code, often more concise than the idiomatic Ruby equivalent. Check out the links
 below for further explanations of these features and examples of their use in Haskell:
@@ -14,7 +10,14 @@ below for further explanations of these features and examples of their use in Ha
 [Function composition in Haskell](http://www.haskell.org/haskellwiki/Function_composition)<br>
 [Curring in Haskell](http://www.haskell.org/haskellwiki/Currying)
 
+Also, watch [this video](http://www.youtube.com/watch?v=m3svKOdZijA) to learn about some of the cool things you can do with 
+function composition and partial application (the video is in Javascript but the ideas still apply to Ruby with Funkify)
+
 ## Usage
+
+### Autocurrying
+
+In order for a Ruby method to be amenable to partial application and composition it must first be autocurried:
 
 ```ruby
 class MyFunkyClass
