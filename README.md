@@ -7,7 +7,7 @@ below for further explanations of these features and examples of their use in Ha
 
 [Partial application in Haskell](http://www.haskell.org/haskellwiki/Partial_application)<br>
 [Function composition in Haskell](http://www.haskell.org/haskellwiki/Function_composition)<br>
-[Curring in Haskell](http://www.haskell.org/haskellwiki/Currying)
+[Currying in Haskell](http://www.haskell.org/haskellwiki/Currying)
 
 Also, watch [this video](http://www.youtube.com/watch?v=m3svKOdZijA) to learn about some of the cool things you can do with
 function composition and partial application (the video is in Javascript but the ideas still apply to Ruby with Funkify)
