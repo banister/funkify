@@ -36,8 +36,11 @@ module Funkify
   public :pass
 
   def compose(*args)
+    raise ArgumentError.new('compose should be used with more than 1 argument') if args.size <= 1
+
     head, *tail = args
     head = _procify(head)
+
     if args.size <= 2
       ->(*xs) { head.(_procify(tail[0]).(*xs)) }
     else

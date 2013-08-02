@@ -102,6 +102,7 @@ describe Funkify do
         def plus_1(x)
           x + 1
         end
+
       end.new
     end
 
@@ -120,6 +121,10 @@ describe Funkify do
 
       it 'can compose multiple methods' do
         (@c.negate * @c.add(5) * @c.mult(5)).(5).should == -30
+      end
+
+      it 'should be used with more than 1 argument' do 
+        should.raise(ArgumentError) { Funkify.compose(@c.add(3)) }
       end
     end
 
