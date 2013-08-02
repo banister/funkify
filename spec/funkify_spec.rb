@@ -132,6 +132,7 @@ describe Funkify do
       it 'should be used with more than 1 argument' do 
         should.raise(ArgumentError) { Funkify.compose(@c.add(3)) }
       end
+
     end
 
     describe "reverse composition" do

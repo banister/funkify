@@ -43,20 +43,11 @@ module Funkify
     raise ArgumentError.new('#compose should be used with more than 1 argument') if args.size <= 1
 
     compacted = args.compact
-    head = _procify(compacted.shift)
+    head = compacted.shift.to_proc
 
     compacted.inject(head) do |x,y| 
-      tail = _procify(y)
+      tail = y.to_proc
       ->(*xs) { x.(tail.(*xs)) }
-    end
-  end
-
-  def _procify(obj)
-    case obj
-    when Symbol
-      method(obj).to_proc
-    else
-      obj.to_proc
     end
   end
 
