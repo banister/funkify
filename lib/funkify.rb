@@ -23,22 +23,16 @@ module Funkify
     end
   end
 
-  module_function
-
-  def curry(obj, *args)
-    case obj
-    when Symbol
-      method(obj).to_proc.curry[*args]
-    else
-      obj.curry(*args)
-    end
+  def curry(method_name, *args)
+    method(method_name).to_proc.curry[*args]
   end
 
   def pass(*xs)
     -> { xs }
   end
-  public :pass
 
+  module_function 
+  
   def compose(*args)
     raise ArgumentError.new('#compose should be used with more than 1 argument') if args.size <= 1
 

@@ -1,6 +1,24 @@
 require 'spec_helper'
 
 describe Funkify do
+  describe "curry method" do 
+    before do 
+      @object = Class.new do 
+        include Funkify
+
+        def add(x,y)
+          x + y
+        end
+      end.new
+    end
+
+    it "can currify simple methods in any object" do 
+      add_5 = @object.curry(:add, 5)
+        
+      [1,2,3,4].collect(&add_5).should == [6,7,8,9]
+    end
+  end
+
   describe "auto_curry method" do
     before do
       @c = Class.new do
