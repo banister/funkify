@@ -32,7 +32,7 @@ module Funkify
   end
 
   module_function 
-  
+
   def compose(*args)
     raise ArgumentError.new('#compose should be used with more than 1 argument') if args.size <= 1
 
@@ -75,13 +75,6 @@ module Funkify
         Funkify.auto_curry_all_methods(self)
       else
         Funkify.auto_curry_some_methods(names, self)
-      end
-    end
-
-    def point_free(&block)
-      ->(*args) do
-        b = instance_exec(&block).curry
-        args.empty? ? b : b[*args]
       end
     end
   end
