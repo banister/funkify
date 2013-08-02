@@ -17,6 +17,10 @@ module Funkify
     def >=(other)
       other.(*self.())
     end
+
+    def self.compose(one, other)
+
+    end
   end
 
   module_function
@@ -36,15 +40,14 @@ module Funkify
   public :pass
 
   def compose(*args)
-    raise ArgumentError.new('compose should be used with more than 1 argument') if args.size <= 1
+    raise ArgumentError.new('#compose should be used with more than 1 argument') if args.size <= 1
 
-    head, *tail = args
-    head = _procify(head)
+    compacted = args.compact
+    head = _procify(compacted.shift)
 
-    if args.size <= 2
-      ->(*xs) { head.(_procify(tail[0]).(*xs)) }
-    else
-      ->(*xs) { head.(compose(*tail)) }
+    compacted.inject(head) do |x,y| 
+      tail = _procify(y)
+      ->(*xs) { x.(tail.(*xs)) }
     end
   end
 

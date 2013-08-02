@@ -123,6 +123,12 @@ describe Funkify do
         (@c.negate * @c.add(5) * @c.mult(5)).(5).should == -30
       end
 
+      it 'compose can be called explicitly with multiple methods' do 
+        proc = Funkify.compose(@c.add(3),@c.add(8),@c.add(5),@c.mult(2))
+
+        proc.(2).should == 20
+      end
+
       it 'should be used with more than 1 argument' do 
         should.raise(ArgumentError) { Funkify.compose(@c.add(3)) }
       end
