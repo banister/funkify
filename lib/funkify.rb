@@ -88,7 +88,7 @@ module Funkify
     end
 
     def point_free(&block)
-      -> (*args) do
+      ->(*args) do
         b = instance_exec(&block).curry
         args.empty? ? b : b[*args]
       end
