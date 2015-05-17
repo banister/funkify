@@ -22,12 +22,10 @@ In order for a Ruby method to be amenable to partial application and composition
 class MyFunkyClass
   include Funkify
 
-  def add(x, y)
+  # we make a specific method autocurried using the auto_curry method (Here with Ruby 2.0 decorator syntax)
+  auto_curry def add(x, y)
     x + y
   end
-
-  # we make a specific method autocurried using the auto_curry method
-  auto_curry :add
 
   # alternatively, if we invoke auto_curry without a parameter
   # then all subsequent methods will be autocurried
