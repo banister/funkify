@@ -17,40 +17,31 @@ module Funkify
     def >=(other)
       other.(*self.())
     end
+
+    def self.compose(one, other)
+
+    end
   end
 
-  module_function
-
-  def curry(obj, *args)
-    case obj
-    when Symbol
-      method(obj).to_proc.curry[*args]
-    else
-      obj.curry(*args)
-    end
+  def curry(method_name, *args)
+    method(method_name).to_proc.curry[*args]
   end
 
   def pass(*xs)
     -> { xs }
   end
-  public :pass
+
+  module_function 
 
   def compose(*args)
-    head, *tail = args
-    head = _procify(head)
-    if args.size <= 2
-      ->(*xs) { head.(_procify(tail[0]).(*xs)) }
-    else
-      ->(*xs) { head.(compose(*tail)) }
-    end
-  end
+    raise ArgumentError.new('#compose should be used with more than 1 argument') if args.size <= 1
 
-  def _procify(obj)
-    case obj
-    when Symbol
-      method(obj).to_proc
-    else
-      obj.to_proc
+    compacted = args.compact
+    head = compacted.shift.to_proc
+
+    compacted.inject(head) do |x,y| 
+      tail = y.to_proc
+      ->(*xs) { x.(tail.(*xs)) }
     end
   end
 
@@ -84,13 +75,6 @@ module Funkify
         Funkify.auto_curry_all_methods(self)
       else
         Funkify.auto_curry_some_methods(names, self)
-      end
-    end
-
-    def point_free(&block)
-      -> (*args) do
-        b = instance_exec(&block).curry
-        args.empty? ? b : b[*args]
       end
     end
   end

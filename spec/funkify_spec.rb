@@ -1,6 +1,24 @@
 require 'spec_helper'
 
 describe Funkify do
+  describe "curry method" do 
+    before do 
+      @object = Class.new do 
+        include Funkify
+
+        def add(x,y)
+          x + y
+        end
+      end.new
+    end
+
+    it "can currify simple methods in any object" do 
+      add_5 = @object.curry(:add, 5)
+        
+      [1,2,3,4].collect(&add_5).should == [6,7,8,9]
+    end
+  end
+
   describe "auto_curry method" do
     before do
       @c = Class.new do
@@ -102,6 +120,7 @@ describe Funkify do
         def plus_1(x)
           x + 1
         end
+
       end.new
     end
 
@@ -121,6 +140,17 @@ describe Funkify do
       it 'can compose multiple methods' do
         (@c.negate * @c.add(5) * @c.mult(5)).(5).should == -30
       end
+
+      it 'compose can be called explicitly with multiple methods' do 
+        proc = Funkify.compose(@c.add(3),@c.add(8),@c.add(5),@c.mult(2))
+
+        proc.(2).should == 20
+      end
+
+      it 'should be used with more than 1 argument' do 
+        should.raise(ArgumentError) { Funkify.compose(@c.add(3)) }
+      end
+
     end
 
     describe "reverse composition" do
